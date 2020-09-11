@@ -35,6 +35,8 @@ actions_n = env.action_space.shape
 obs_n = env.observation_space.shape
 
 
+
+
 # Create Actor and Critic networks
 k.clear_session()
 actor = get_actor(obs_n, actions_n)
@@ -50,9 +52,8 @@ agent = DDPGAgent(nb_actions=actions_n[0], actor=actor, critic=critic, batch_siz
 
 agent.compile([Adam(lr=1e-4), Adam(lr=1e-3)], metrics=['mse'])
 
-# agent.load_weights('ddpg_' + ENV_NAME + 'weights.h5f')
+#agent.load_weights('ddpg_' + ENV_NAME + 'weights.h5f')
 agent.fit(env, env_name=ENV_NAME, nb_steps=500000, action_repetition=5, visualize=False, verbose=1)
-
 
 
 
